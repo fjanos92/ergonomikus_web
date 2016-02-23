@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>JS Alapok</title>
+
+<script>
+
+"use strict";
+
+function log() {console.log.apply(console, arguments);}
+function echo(attr){console.log('>>> ' + attr.toString());}
+function varlog(v){console.log('var: [' + typeof v + ']', v);}
+
+
+
+
+log('*************************** types');
+
+var a;
+varlog(a);
+
+
+a = true;
+varlog(a);
+
+a = 1;
+varlog(a);
+
+a = '1';
+varlog(a);
+
+
+
+a = '1'/2;
+varlog(a);
+
+a = 'a'/1;
+varlog(a);
+
+
+a = null;
+varlog(a);
+
+
+
+log('*************************** comparison')
+
+log('1==1', 1==1);
+log('"1"==1', "1"==1);
+log('"1"===1', "1"===1);
+
+log('parseInt("1")===1', parseInt("1")===1);
+log('parseInt("1a1")===1', parseInt("1a1")===1);
+
+
+
+
+log('*************************** array')
+
+a = new Array();
+
+a = [1,2,['a','b','c'],4,5];
+a = [];
+a.push(1);
+a.push(2,3,4);
+a.pop();
+a.shift();
+a.unshift(0);
+a[1] = 'elso index';
+
+varlog(a);
+log("a instanceof Array", a instanceof Array)
+
+
+
+log('*************************** function');
+
+function hi(name){
+	log('Hi '+name);
+}
+hi('Rossini');
+varlog(hi);
+
+var myFunc = function(){
+
+}
+varlog(myFunc);
+
+try{
+	test1();
+}catch(error){
+	echo ('TEST1 NOT FOUND');
+}
+
+function test1(){
+	echo('TEST1 OK');
+}
+var test2 = function(){
+	echo ('TEST2 OK');
+}
+try{
+	test2();
+}catch(error){
+	echo ('TEST2 NOT FOUND');
+}
+
+
+
+
+
+log('*************************** object');
+
+a = new Object();
+varlog(a);
+
+a.something = 'alfa';
+varlog(a);
+varlog(a.something);
+
+
+
+a.somethingElse = 'beta';
+for(var propertyName in a){
+	 log(propertyName);
+}
+
+log(a['somethingElse']);
+
+for(var propertyName in a){
+	log(propertyName, a[propertyName]);
+}
+
+a.myFunc = function(name){
+	echo('HEllo '+name+'!');
+}
+a.myFunc('Elvis');
+varlog(a);
+
+
+
+log('*************************** json');
+
+a = {};
+varlog(a);
+
+a = {
+	something: 'alfa', 
+	somethingElse: 'beta',
+	hello: 'Szia',
+	myFunc: function(name){
+		echo(this.hello+' '+name+'!');
+	}
+};
+a.myFunc('Lennon');
+varlog(a);
+
+
+
+log('*************************** prototype');
+
+log(a);
+echo(a);
+
+
+a.toString = function(){
+	return this.something+' '+this.somethingElse;
+}
+log(a);
+echo(a);
+
+
+
+
+log('*************************** class');
+
+function MyClass(name){
+	this.name = name;
+}
+
+
+MyClass.prototype = {
+	sayHello: function(){
+		echo('Hello '+this.name);
+	}
+}
+
+var myObject = new MyClass('Dylan');
+
+
+myObject.sayHello();
+log(myObject);
+
+
+
+log('*************************** extend 1');
+
+function MyClass1(name){
+	this.name = name;
+}
+MyClass1.prototype = Object.create(MyClass.prototype);
+
+MyClass1.prototype.sayGoodBye = function(){
+	echo('Pa '+this.name);
+}
+var myObject1 = new MyClass1('Chuck')
+myObject1.sayHello();
+myObject1.sayGoodBye();
+log(myObject1)
+
+
+
+log('*************************** extend 2');
+
+function MyClass2(name, birthYear){
+	MyClass.call(this, name);
+	this.birthYear = birthYear;
+}
+MyClass2.prototype = Object.create(MyClass.prototype);
+MyClass2.prototype.sayHello = function(){
+	MyClass.prototype.sayHello.call(this);
+	if(this.birthYear<1990) echo('jól vagy öreg?');
+	else echo('Jó fiatalnak lenni, mi?');
+}
+var myObject2 = new MyClass2('Young', 1994);
+myObject2.sayHello()
+log(myObject2)
+
+
+
+log('*************************** extend 3');
+
+function MyClass3(name, birthYear){
+	MyClass.call(this, name);
+	this.birthYear = birthYear;
+}
+MyClass3.prototype = Object.create(MyClass.prototype);
+MyClass3.prototype.SUPER = MyClass.prototype;
+
+MyClass3.prototype.sayHello = function(){
+	this.SUPER.sayHello.call(this);
+	if(this.birthYear<1990) echo('jól vagy öreg?');
+	else echo('Jó fiatalnak lenni, mi?');
+}
+var myObject3 = new MyClass3('Old', 1977);
+myObject3.sayHello();
+log(myObject3)
+
+
+
+log('*************************** default arguments');
+
+function sayHello(name, age){
+	echo('hello '+name+' '+age+' éves vagy');
+}
+sayHello('Lajos')
+
+function sayHello2(name, age){
+	if(typeof age == 'undefined') age = 0;
+	echo('hello '+name+' '+age+' éves vagy');
+}
+sayHello2('Imi');
+
+
+
+log('*************************** exceptions');
+
+function sayHello3(name, age){
+	if(typeof name == 'undefined') throw ('Baj van, nem kaptam nevet!!!');
+	if(typeof age == 'undefined') age = 0;
+	echo ('hello '+name+' '+age+' éves vagy');
+}
+
+// kezeletlen kivétel fog keletkezni!
+ //sayHello3()
+
+try{
+	sayHello3();
+}catch(error){
+	log(error)
+}
+
+
+
+
+log('*************************** arguments');
+
+function add(a,b){
+	return a+b;
+}
+echo(add(1,2))
+
+function add2(){
+	log(arguments);
+	var sum = 0;
+	var i;
+	for(i in arguments){
+		sum += arguments[i];
+	}
+	return sum;
+}
+
+echo(add2(1,2,3,4,5,6))
+
+
+log('*************************** global scope');
+
+var a = 1;
+var b = 2;
+
+
+function doSomething(){
+	var a = 0;
+	b = 4;
+	log(a, b);
+}
+doSomething();
+log(a, b);
+
+
+log('*************************** strict mode');
+
+function doSomethingElse(){
+	// ez hibás strict módban
+	//c = 6;
+}
+doSomethingElse();
+// echo(c);
+
+
+// Class A *******************************************
+var A = function(a){
+		this.a = a;
+	}
+
+	// add
+	A.prototype.add = function(param){
+		this.a += param;
+	}
+
+	// print
+	A.prototype.print = function(){
+		console.log(this.a);
+	}
+
+
+// Class B : A *******************************************
+var B = function(a){
+		A.call(this, a)
+	}
+	B.prototype = Object.create(A.prototype);
+
+	// multiple
+	B.prototype.multiple = function(param){
+		this.a *= param;
+	}
+
+  
+// Class C : B *******************************************
+var C = function(a){
+		B.call(this, a)
+	}
+	C.prototype = Object.create(B.prototype);
+	C.prototype.SUPER = B.prototype;
+
+
+	// divide
+	C.prototype.divide = function(a){
+		this.a /= a;
+	}
+
+	// print
+	C.prototype.print = function(){
+		console.log('hello');
+		this.SUPER.print.call(this)
+	}
+log(new C)
+
+</script>
+
+
+
+</head>
+<body>
+
+Hello, nyisd meg a konzolt és láss csodát!
+
+</body>
+</html>

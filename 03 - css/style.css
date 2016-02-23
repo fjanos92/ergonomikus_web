@@ -1,0 +1,174 @@
+	*{font-family: "Trebuchet MS";}
+	a{text-decoration: none;}
+	body{
+		margin:0;
+		background-color: #7f8c8d;
+		background-image: url(https://wallpaperscraft.com/image/gears_of_war_monster_arm_scream_skull_21135_3840x2160.jpg);
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+	}
+
+/*HEADER*/
+	header{
+		background-color: #34495e;
+		color:#ffffff;
+	}
+	header h1{
+		background-image: url(http://behance.vo.llnwd.net/profiles25/637504/projects/9568965/805145fa369a729b3a38ccd14417e569.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		padding:15px 0 15px 100px;
+		font-weight: normal;
+		font-size:28px;
+		color:#fff;
+		margin: 0;
+	}
+	header h1 em{
+		color: #95a5a6;
+		display: block;
+		font-size:12px;
+	}
+	header nav{
+		background-color: #2c3e50;
+		padding:0 15px;
+		margin:0;
+		line-height: 50px;
+	}
+	header nav a{
+		font-size:14px;
+		color:#3498db;
+		text-decoration: none;
+		padding:0 10px;
+		transition: color .5s;
+		text-transform: uppercase;
+	}
+	header nav a:hover{
+		color:white;
+	}
+	header nav a.selected{
+		color:#f1c40f;
+	}
+
+/*Features Section*/
+	section.features{
+		height: 256px;
+		padding:30px 0;
+		background-color: rgba(149, 165, 166, .6);
+		width: 900px;
+		margin:0 auto;
+	}
+
+	section.features img{
+		float:left;
+		margin-left:33px;
+		border:3px solid white;
+		transition: all .5s;
+	}
+
+	section.features:hover img:not(:hover){
+		opacity: .5;
+	}
+
+	section.features img:hover{
+		box-shadow: 0 0 20px #000000;
+	}
+
+/*ARTICLES SECTION*/
+	section.articles{
+		width: 900px;
+		background-color: #ecf0f1;
+		overflow: hidden;
+		margin:0 auto;
+	}
+	section.articles nav{
+		float:left;
+		width: 150px;
+		background-color: #34495e;
+	}
+	section.articles nav a{
+		display: block;
+		padding:10px 30px;
+		color: white;
+		font-size: 12px;
+		transition: all .5s;
+	}
+	section.articles nav a:hover{
+		background-color: #bdc3c7;
+		color:#2c3e50;
+		padding-left: 15px;
+	}
+	section.articles nav a.selected{
+		background-color: #ecf0f1;
+		padding-left: 10px;
+		color:#d35400;
+		font-weight: bold;
+	}
+
+	section.articles article{
+		float:right;
+		width: 700px;
+		margin: 25px;
+		color:#666;
+		font-size: 14px;
+	}
+	section.articles article h1{
+		margin: 0;
+		font-size: 24px;
+		color:#333333;
+	}
+	section.articles article p{
+		line-height: 25px;
+		text-align: justify;
+	}
+	section.articles article strong{
+		color:#333333;
+	}
+
+	section.articles p a{
+		color:#3498db;
+	}
+
+	section.articles p a:hover{
+		text-decoration: underline;
+	}
+
+	section.articles p img{
+		float:right;
+		margin: 5px 0 5px 15px;
+	}
+
+
+	section.articles ul {
+		list-style-type:none;
+		list-style-position:inside;
+		padding: 10px 0;
+		color:#d35400;
+		font-size:12px;
+	}
+	section.articles ul li {
+		padding: 6px 8px;
+		color:#666;
+		border-bottom: 1px dotted #bdc3c7;
+	}
+	section.articles ul li:first-child {
+		border-top: 1px dotted #bdc3c7;
+	}
+	section.articles ul[title]:before{
+		content: attr(title)":";
+		display: block;
+		color: #7f8c8d;
+		padding: 6px 20px;
+		font-size: 11px;
+	}
+
+/*footer*/
+	footer{
+		background-color: #34495e;
+		color:#ffffff;
+		padding: 30px;
+		text-align: center;
+		font-size:12px;
+		width: 840px;
+		margin:0 auto;
+	}
